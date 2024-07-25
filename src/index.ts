@@ -1,5 +1,5 @@
-import { server } from "./server/server";
+import { server } from "./server/Server";
 
-server.listen(3000, () => {
-    console.log("servidor on!");
+server.listen(process.env.PORT || 3232, () => {
+    console.log(`servidor on! PORT: ${process.env.PORT || 3232}`);
 });
