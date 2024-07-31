@@ -30,7 +30,5 @@ export const updateById = async (
 ) => {
   console.log(req.params);
   console.log(req.body);
-  return res
-    .status(StatusCodes.INTERNAL_SERVER_ERROR)
-    .send("Não implementado!");
+  return res.status(StatusCodes.OK).send("Não implementado!");
 };
