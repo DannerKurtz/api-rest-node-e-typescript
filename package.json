@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "production": "node ./build/index.js",
-    "postinstall": "tsc",
+
     "start": "ts-node-dev ./src/index.ts"
   },
   "author": "",
