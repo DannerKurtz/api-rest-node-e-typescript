@@ -4,6 +4,7 @@ import * as yup from "yup";
 
 import { validation } from "../../shared/middlewares";
 import { ICidade } from "../../database/models";
+import { CidadesProvider } from "../../database/providers/cidades";
 
 interface IParamsProps {
   id?: number;
@@ -27,7 +28,9 @@ export const updateById = async (
   req: Request<IParamsProps, {}, IBodyProps>,
   res: Response
 ) => {
-  console.log(req.params);
-  console.log(req.body);
-  return res.status(StatusCodes.OK).send("Não implementado!");
+  const result = await CidadesProvider.updateById(
+    Number(req.params.id),
+    req.body
+  );
+  return res.status(StatusCodes.OK).json(result);
 };

@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 
 import { validation } from "../../shared/middlewares";
+import { CidadesProvider } from "../../database/providers/cidades";
 
 interface IParamsProps {
   id?: number;
@@ -17,5 +18,6 @@ export const getByIdValidation = validation((getSchema) => ({
 }));
 
 export const getById = async (req: Request<IParamsProps>, res: Response) => {
-  return res.status(StatusCodes.OK).send("Não implementado!");
+  const result = await CidadesProvider.getById(Number(req.params.id));
+  return res.status(StatusCodes.OK).json(result);
 };

@@ -3,6 +3,8 @@ import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 
 import { validation } from "../../shared/middlewares";
+import { CidadesController } from ".";
+import { CidadesProvider } from "../../database/providers/cidades";
 
 interface IQueryProps {
   page?: number;
@@ -24,5 +26,7 @@ export const getAll = async (
   req: Request<{}, {}, {}, IQueryProps>,
   res: Response
 ) => {
-  return res.status(StatusCodes.OK).send("Não implementado!");
+  const result = await CidadesProvider.getAll();
+
+  return res.status(StatusCodes.OK).json(result);
 };

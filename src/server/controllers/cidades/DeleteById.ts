@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 
 import { validation } from "../../shared/middlewares";
+import { CidadesProvider } from "../../database/providers/cidades";
 
 interface IParamsProps {
   id?: number;
@@ -17,6 +18,6 @@ export const deleteByIdValidation = validation((getSchema) => ({
 }));
 
 export const deleteById = async (req: Request<IParamsProps>, res: Response) => {
-  console.log(req.params);
-  return res.status(StatusCodes.OK).send("Não implementado!");
+  const result = await CidadesProvider.deleteById(Number(req.params.id));
+  return res.status(StatusCodes.OK).json(result);
 };
