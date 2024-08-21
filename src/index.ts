@@ -1,3 +1,4 @@
+import knex from "knex";
 import { Knex } from "./server/database/knex";
 import { server } from "./server/Server";
 
@@ -11,7 +12,12 @@ if (process.env.IS_LOCALHOST !== "true") {
   Knex.migrate
     .latest()
     .then(() => {
-      startServer();
+      Knex.seed
+        .run()
+        .then(() => {
+          startServer();
+        })
+        .catch(console.log);
     })
     .catch(console.log);
 } else {
