@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import { ETableNames } from "../../ETableNames";
+import { ETableNames } from "../ETableNames";
 
 export const seed = async (knex: Knex) => {
   const [{ count }] = await knex(ETableNames.cidade).count<[{ count: number }]>(

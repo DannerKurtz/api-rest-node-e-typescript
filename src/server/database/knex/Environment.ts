@@ -5,7 +5,14 @@ export const development: Knex.Config = {
   client: "sqlite3",
   useNullAsDefault: true,
   connection: {
-    filename: path.resolve(__dirname, "..", "..", "..", "..", "databse.sqlite"),
+    filename: path.resolve(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      "..",
+      "database.sqlite"
+    ),
   },
   migrations: {
     directory: path.resolve(__dirname, "..", "migrations"),
@@ -16,10 +23,10 @@ export const development: Knex.Config = {
   pool: {
     afterCreate: (connection: any, done: Function) => {
       connection.run("PRAGMA foreign_keys = ON");
-
       done();
     },
   },
+  debug: true,
 };
 
 export const test: Knex.Config = {
