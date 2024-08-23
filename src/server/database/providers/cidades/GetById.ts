@@ -1,5 +1,5 @@
 import { Knex } from "../../knex";
-import { ETableNames } from "../../../ETableNames";
+import { ETableNames } from "../../ETableNames";
 
 export const getById = async (id: Number): Promise<object | Error> => {
   try {

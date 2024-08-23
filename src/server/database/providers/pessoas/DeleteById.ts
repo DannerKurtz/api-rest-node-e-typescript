@@ -3,7 +3,7 @@ import { ETableNames } from "../../ETableNames";
 
 export const deleteById = async (id: number): Promise<void | Error> => {
   try {
-    const result = await Knex(ETableNames.cidade).where("id", "=", id).del();
+    const result = await Knex(ETableNames.pessoa).where("id", "=", id).del();
 
     console.log(result);
     if (result > 0) return;

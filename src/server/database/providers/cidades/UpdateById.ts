@@ -1,11 +1,11 @@
 import { Knex } from "../../knex";
-import { ETableNames } from "../../../ETableNames";
+import { ETableNames } from "../../ETableNames";
 import { ICidade } from "../../models";
 
 export const updateById = async (
   id: Number,
   cidade: Omit<ICidade, "id">
-): Promise<object | Error> => {
+): Promise<void | Error> => {
   try {
     console.log(typeof id);
     const result = await Knex(ETableNames.cidade)
@@ -13,8 +13,8 @@ export const updateById = async (
       .where("id", id);
 
     console.log(result);
-    if (typeof result === "object") {
-      return result;
+    if (result > 0) {
+      return;
     }
     return new Error("Erro ao cadastrar registro!");
   } catch (error) {
