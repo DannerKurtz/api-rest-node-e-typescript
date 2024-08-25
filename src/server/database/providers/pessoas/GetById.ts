@@ -1,7 +1,8 @@
 import { Knex } from "../../knex";
 import { ETableNames } from "../../ETableNames";
+import { IPessoa } from "../../models";
 
-export const getById = async (id: Number): Promise<object | Error> => {
+export const getById = async (id: Number): Promise<IPessoa | Error> => {
   try {
     console.log(typeof id);
     const [result] = await Knex(ETableNames.pessoa)
@@ -11,7 +12,7 @@ export const getById = async (id: Number): Promise<object | Error> => {
         "pessoas.email",
         "cidades.nome"
       )
-      .where("pessoas.id", id)
+      .where("pessoas.cidadeId", id)
       .join("cidades", "cidades.id", "pessoas.cidadeId");
 
     console.log(result);

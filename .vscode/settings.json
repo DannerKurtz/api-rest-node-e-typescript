@@ -1,7 +1,10 @@
 {
-    "cSpell.words": [
-        "databse",
-        "knexfile",
-        "sqlite"
-    ]
+  "cSpell.words": [
+    "databse",
+    "knexfile",
+    "sqlite",
+    "usuario",
+    "Usuario",
+    "usuarios"
+  ]
 }

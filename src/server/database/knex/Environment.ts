@@ -26,7 +26,7 @@ export const development: Knex.Config = {
       done();
     },
   },
-  debug: true,
+  // debug: true,
 };
 
 export const test: Knex.Config = {

@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  
   "dependencies": {
     "http-status-codes": "^2.3.0",
     "dotenv": "^16.4.5",
