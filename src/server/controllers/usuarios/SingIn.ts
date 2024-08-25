@@ -2,6 +2,7 @@ import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 
+import { JWTService } from "../../shared/services";
 import { validation } from "../../shared/middlewares";
 import { UsuariosProvider } from "../../database/providers/usuarios";
 import { IUsuario } from "../../database/models";
@@ -38,8 +39,16 @@ export const singIn = async (req: Request<IBodyProps>, res: Response) => {
       },
     });
   } else {
-    return res
-      .status(StatusCodes.ACCEPTED)
-      .send({ token: "teste.teste.teste" });
+    const accessToken = JWTService.sign({ uid: result.id });
+
+    if (accessToken === "JWT_SECRET_NOT_FOUND") {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        errors: {
+          default: "Erro ao gerar o token de acesso",
+        },
+      });
+    }
+
+    return res.status(StatusCodes.ACCEPTED).send({ token: accessToken });
   }
 };
