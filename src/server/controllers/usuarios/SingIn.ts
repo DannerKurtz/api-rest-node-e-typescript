@@ -22,16 +22,16 @@ export const singInValidation = validation((getSchema) => ({
 export const singIn = async (req: Request<IBodyProps>, res: Response) => {
   const { email, senha } = req.body;
 
-  const result = await UsuariosProvider.getByEmail(email);
+  const usuario = await UsuariosProvider.getByEmail(email);
 
-  if (result instanceof Error) {
+  if (usuario instanceof Error) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       errors: {
         default: "E-mail ou senha inválidos",
       },
     });
   }
-  const password = PasswordCrypto.verifyPassword(senha, result.senha);
+  const password = await PasswordCrypto.verifyPassword(senha, usuario.senha);
   if (!password) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       errors: {
@@ -39,7 +39,7 @@ export const singIn = async (req: Request<IBodyProps>, res: Response) => {
       },
     });
   } else {
-    const accessToken = JWTService.sign({ uid: result.id });
+    const accessToken = JWTService.sign({ uid: usuario.id });
 
     if (accessToken === "JWT_SECRET_NOT_FOUND") {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

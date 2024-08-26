@@ -21,6 +21,7 @@ export const create = async (
   res: Response
 ) => {
   const result = await CidadesProvider.create(req.body);
+  console.log(result);
   if (result instanceof Error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errorResult: {

@@ -32,7 +32,7 @@ describe("Usuarios - Entrar com sucesso", () => {
     expect(typeof res1.body).toEqual("number");
 
     const result1 = await testServer.post("/entrar").send({
-      email: "email2@teste.com",
+      email: "email78@teste.com",
       senha: "123456",
     });
 

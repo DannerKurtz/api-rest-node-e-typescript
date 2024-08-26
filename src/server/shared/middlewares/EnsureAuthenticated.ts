@@ -19,8 +19,10 @@ export const ensureAuthenticated: RequestHandler = async (req, res, next) => {
     });
   }
 
+  console.log(token);
   const jwtData = JWTService.verify(token);
 
+  console.log(jwtData);
   if (jwtData === "JWT_SECRET_NOT_FOUND") {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: { default: "Erro ao verificar o token" },
@@ -31,9 +33,7 @@ export const ensureAuthenticated: RequestHandler = async (req, res, next) => {
     });
   }
 
-  console.log(jwtData);
-
   req.headers.idUsuario = jwtData.uid.toString();
-  
+
   return next();
 };
